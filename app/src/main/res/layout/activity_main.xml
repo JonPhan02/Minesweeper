@@ -28,7 +28,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="1"
             android:textSize="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.396"
@@ -41,10 +40,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="1:23"
             android:textSize="32dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.84"
+            app:layout_constraintHorizontal_bias="0.895"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints"></TextView>
@@ -59,7 +57,7 @@
             android:scaleType="centerCrop"
             android:src="@drawable/clock"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.639"
+            app:layout_constraintHorizontal_bias="0.601"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteY="32dp">
@@ -73,7 +71,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="50dp"
             android:layout_centerHorizontal="true"
             app:rowCount="10"
             app:columnCount="8"
@@ -82,6 +80,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/result"
             >
+
         </androidx.gridlayout.widget.GridLayout>
 
         <TextView
@@ -96,5 +95,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             >
         </TextView>
+
+        <ImageButton
+            android:id="@+id/tool"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.507"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -79,9 +79,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/result"
-            >
-
-        </androidx.gridlayout.widget.GridLayout>
+            />
 
         <TextView
             android:id="@+id/result"

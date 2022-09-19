@@ -2,6 +2,7 @@ package com.example.minesweeper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -67,33 +68,41 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        Set<String> bombs = new HashSet<>();
         for (int i = 0; i < 4; i++) {
             int x = rand.nextInt(10);
             int y = rand.nextInt(8);
-            if (i == 0) {
-                bombLocations[0] = x;
-                bombLocations[1] = y;
-            } else if (i == 1) {
-                bombLocations[2] = x;
-                bombLocations[3] = y;
-            } else if (i == 2) {
-                bombLocations[4] = x;
-                bombLocations[5] = y;
-            } else if (i == 3) {
-                bombLocations[6] = x;
-                bombLocations[7] = y;
+            String location = String.valueOf(x) + String.valueOf(y);
+            if (!bombs.contains(location)) {
+                bombs.add(location);
+
+                if (i == 0) {
+                    bombLocations[0] = x;
+                    bombLocations[1] = y;
+                } else if (i == 1) {
+                    bombLocations[2] = x;
+                    bombLocations[3] = y;
+                } else if (i == 2) {
+                    bombLocations[4] = x;
+                    bombLocations[5] = y;
+                } else if (i == 3) {
+                    bombLocations[6] = x;
+                    bombLocations[7] = y;
+                }
+                TextView tv = new TextView(this);
+                tv.setOnClickListener(this::clickBomb);
+
+                GridLayout.LayoutParams lp = new GridLayout.LayoutParams();
+                lp.setMargins(5, 5, 5, 5);
+
+                lp.rowSpec = GridLayout.spec(x, 1f);
+
+                lp.columnSpec = GridLayout.spec(y, 1f);
+
+                grid.addView(tv, lp);
+            } else {
+                i--;
             }
-            TextView tv = new TextView(this);
-            tv.setOnClickListener(this::clickBomb);
-
-            GridLayout.LayoutParams lp = new GridLayout.LayoutParams();
-            lp.setMargins(5, 5, 5, 5);
-
-            lp.rowSpec = GridLayout.spec(x, 1f);
-
-            lp.columnSpec = GridLayout.spec(y, 1f);
-
-            grid.addView(tv, lp);
         }
     }
 
@@ -103,7 +112,11 @@ public class MainActivity extends AppCompatActivity {
         temp.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         view.setBackgroundColor(Color.CYAN);
         onClickStopTimer();
-        //add end game method
+        Intent intent = new Intent(this, ResultActivity.class);
+        intent.putExtra("time", String.valueOf(totalSeconds));
+        intent.putExtra("result", "You Lost");
+        startActivity(intent);
+
     }
 
     public void onClickTV(View view) {
@@ -253,11 +266,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 totalSeconds = seconds / 60;
-                int secs = totalSeconds % 60;
-                int minutes = totalSeconds / 60;
-                int hours = totalSeconds / 3600;
-                String time = String.format("%d:%02d:%02d", hours, minutes, secs);
-                timeView.setText(time);
+                timeView.setText(String.valueOf(totalSeconds));
                 if (running) {
                     seconds++;
                 }
